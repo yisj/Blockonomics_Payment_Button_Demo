@@ -120,3 +120,50 @@ Illuminate\Database\QueryException  : could not find driver (SQL: select * from 
 ```
 $ sudo apt install php-mysql
 ```
+
+#### SMTP 
+```
+$ sudo apt install postfix
+System mail name: metvn.com
+$ sudo dpkg-reconfigure postfix
+```
+* Internet Site
+* metvn.com
+* metvn
+* metvn.com, localhost.localdomain, localhost
+* No
+* 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 
+* 0
+* +
+* all
+```
+$ sudo postconf -e 'home_mailbox= Maildir/'
+$ sudo postconf -e 'virtual_alias_maps= hash:/etc/postfix/virtual'
+$ sudo nano /etc/postfix/virtual
+```
+```
+metvn@metvn.com metvn
+```
+```
+$ sudo postmap /etc/postfix/virtual
+$ sudo systemctl restart postfix
+$ sudo ufw allow Postfix
+$ echo 'export MAIL=~/Maildir' | sudo tee -a /etc/bash.bashrc | sudo tee -a /etc/profile.d/mail.sh
+$ source /etc/profile.d/mail.sh
+$ sudo apt install s-nail
+$ sudo vim /etc/s-nail.rc
+```
+```
+. . .
+set emptystart
+set folder=Maildir
+set record=+sent
+```
+```
+$ echo 'init' | s-nail -s 'init' -Snorecord metvn
+$ ls -R ~/Maildir
+$ s-nail
+$ vim ~/test_message
+$ cat ~/test_message | s-nail -s 'Test email subject line' -r contact@example.com user@email.com
+
+```
