@@ -109,7 +109,7 @@ Access denied for user 'root'@'localhost'
 ```
 $ CREATE DATABASE metvndb;
 $ SHOW DATABASES;
-$ CREATE USER 'metvnuser'@'localhost' IDENTIFIED BY 'rainbow8*';
+$ CREATE USER 'metvnuser'@'localhost' IDENTIFIED BY 'new_password';
 $ GRANT ALL PRIVILEGES ON metvndb.* TO 'metvnuser'@'localhost';
 $ FLUSH PRIVILEGES;
 $ SHOW GRANTS FOR 'metvnuser'@'localhost';
